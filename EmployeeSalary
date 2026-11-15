@@ -1,0 +1,49 @@
+# Employee Salary Management
+
+# Salary List
+salaries = [45000, 25000, 60000, 30000, 55000, 20000]
+
+n = len(salaries)
+
+# 1. Selection Sort
+for i in range(n):
+    min_index = i
+
+    for j in range(i + 1, n):
+        if salaries[j] < salaries[min_index]:
+            min_index = j
+
+    salaries[i], salaries[min_index] = salaries[min_index], salaries[i]
+
+# 2. Binary Search
+target = float(input("Enter salary to search: "))
+
+low = 0
+high = n - 1
+found = False
+
+while low <= high:
+    mid = (low + high) // 2
+
+    if salaries[mid] == target:
+        found = True
+        break
+    elif salaries[mid] < target:
+        low = mid + 1
+    else:
+        high = mid - 1
+
+# Display Results
+print("\n----- Employee Salary Results -----")
+
+print("Sorted Salaries:", salaries)
+
+if found:
+    print("Salary Found:", target)
+else:
+    print("Salary Not Found:", target)
+
+print("Top 5 Highest Salaries:")
+
+for i in range(n - 1, max(-1, n - 6), -1):
+    print(salaries[i])
